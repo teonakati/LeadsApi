@@ -28,5 +28,21 @@ namespace LeadsApi.Domain.Entities
         public string Description { get; set; }
         public decimal Price { get; set; }
         public bool? Accepted { get; set; }
+
+        public void Accept()
+        {
+            this.Accepted = true;
+
+            if (this.Price > 500)
+            {
+                var discount = 0.9m;
+                this.Price *= discount;
+            }
+        }
+
+        public void Decline()
+        {
+            this.Accepted = false;
+        }
     }
 }

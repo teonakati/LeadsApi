@@ -8,7 +8,8 @@ namespace LeadsApi.Domain.Interfaces
     {
         Task<List<LeadInvitedResponse>> GetInvitedLeads();
         Task<List<LeadAcceptedResponse>> GetAcceptedLeads();
-        Task Accept(int id);
         Task<Lead> CreateLead(CreateLeadRequest lead);
+        Task<Lead> GetById(int id);
+        Task Update(Lead lead);
     }
 }

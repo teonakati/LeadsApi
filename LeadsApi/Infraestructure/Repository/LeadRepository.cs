@@ -35,14 +35,18 @@ namespace LeadsApi.Infraestructure.Repository
             return Task.FromResult(entity);
         }
 
-        public Task Accept(int id)
+        public Task<Lead> GetById(int id)
         {
             var entity = _context.Set<Lead>().Find(id);
 
             if (entity is null) throw new Exception("Lead not found");
 
+            return Task.FromResult(entity);
+        }
 
-            entity.Accepted = true;
+        public Task Update(Lead lead)
+        {
+            _context.Set<Lead>().Update(lead);
             _context.SaveChanges();
 
             return Task.CompletedTask;

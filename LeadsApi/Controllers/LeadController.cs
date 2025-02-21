@@ -1,4 +1,5 @@
 ﻿using LeadsApi.Application.Commands;
+using LeadsApi.Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,21 +17,28 @@ namespace LeadsApi.Controllers
             return Ok(mediator.Send(request).Result);
         }
 
-        [HttpPatch]
-        public void AcceptLead()
+        [HttpPatch("{id}")]
+        public IActionResult AcceptLead([FromServices] IMediator mediator, int id)
         {
+            return Ok(mediator.Send(new AcceptLeadRequest(id)).Result);
+        }
 
+        [HttpDelete("{id}")]
+        public IActionResult DeclineLead([FromServices] IMediator mediator, int id)
+        {
+            return Ok(mediator.Send(new DeclineLeadRequest(id)).Result);
         }
 
         [HttpGet("tab/invited")]
-        public void GetInvited()
+        public IActionResult GetInvited([FromServices] IMediator mediator)
         {
-
+            return Ok(mediator.Send(new GetLeadInvited()).Result);
         }
 
         [HttpGet("tab/accepted")]
-        public void GetAccepted()
+        public IActionResult GetAccepted([FromServices] IMediator mediator)
         {
+            return Ok(mediator.Send(new GetLeadAccepted()).Result);
 
         }
     }
